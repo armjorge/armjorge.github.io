@@ -2,12 +2,13 @@
 title: FitQuest - AR Fitness Adventure Game
 description: This web application encourages users to embark on thrilling adventures, complete challenges, and achieve fitness goals in an engaging virtual environment.
 publishDate: 'Dec 28 2023'
+lang: en
 seo:
   image:
-    src: '../../assets/images/project-6.jpg'
+    src: '../../../assets/images/project-6.jpg'
 ---
 
-![Project preview](../../assets/images/project-6.jpg)
+![Project preview](../../../assets/images/project-6.jpg)
 
 **Note:** This case study is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
 

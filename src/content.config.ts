@@ -34,6 +34,10 @@ const pages = defineCollection({
     schema: ({ image }) =>
         z.object({
             title: z.string(),
+            // Optional language code for localized pages (e.g., en, es, fr)
+            lang: z.enum(['en', 'es', 'fr']).optional(),
+            // Optional page identifier to indicate which page it is (about, contact, terms)
+            page: z.enum(['about', 'contact', 'terms']).optional(),
             seo: seoSchema(image).optional()
         })
 });

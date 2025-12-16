@@ -1,6 +1,7 @@
 ---
 import NavLink from './NavLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 import siteConfig from '../data/site-config';
 
 const navLinks = siteConfig.headerNavLinks ?? [];
@@ -36,7 +37,8 @@ const navLinks = siteConfig.headerNavLinks ?? [];
             </div>
         )
     }
-    <div class="absolute top-4 right-0 z-10 md:top-8">
+    <div class="absolute top-4 right-0 z-10 md:top-8 flex flex-col items-end gap-2">
+        <LanguageSwitcher />
         <ThemeToggle />
     </div>
 </nav>

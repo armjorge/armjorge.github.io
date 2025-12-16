@@ -1,0 +1,32 @@
+---
+const languages = ['en', 'es', 'fr'] as const;
+const labels: Record<(typeof languages)[number], string> = { en: 'EN', es: 'ES', fr: 'FR' };
+
+function computeHref(target: string) {
+  const path = Astro.url?.pathname ?? '/';
+  const clean = path.replace(/\/+$/, '') || '/';
+  if (clean === '/') return `/${target}/about`;
+  const parts = clean.split('/').filter(Boolean);
+  let slugParts = parts;
+  if (languages.includes(parts[0] as any)) slugParts = parts.slice(1);
+  const slug = slugParts.length ? slugParts.join('/') : 'about';
+  const base = slug.split('/')[0];
+  const allowed = ['about', 'contact', 'terms'];
+  const finalSlug = allowed.includes(base) ? slug : 'about';
+  return `/${target}/${finalSlug}`;
+}
+
+const currentSeg = (Astro.url?.pathname.split('/')[1] ?? '') as typeof languages[number] | '';
+const currentLang = languages.includes(currentSeg as any) ? (currentSeg as any) : 'en';
+---
+<nav aria-label="Language selector" class="flex items-center gap-1">
+  {languages.map((lang) => (
+    <a
+      href={computeHref(lang)}
+      class={`px-2 py-1 text-xs border rounded hover:underline ${lang === currentLang ? 'font-semibold' : ''}`}
+      aria-current={lang === currentLang ? 'true' : 'false'}
+    >
+      {labels[lang]}
+    </a>
+  ))}
+</nav>

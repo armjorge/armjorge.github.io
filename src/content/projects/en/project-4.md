@@ -2,12 +2,13 @@
 title: 'NeuralPlaylist - AI Generated Music Recommendations'
 description: Leveraging advanced algorithms and machine learning, NeuralPlaylist crafts personalized music recommendations based on users' preferences, moods, and even biometric data.
 publishDate: 'Oct 19 2023'
+lang: en
 seo:
   image:
-    src: '../../assets/images/project-4.jpg'
+    src: '../../../assets/images/project-4.jpg'
 ---
 
-![Project preview](../../assets/images/project-4.jpg)
+![Project preview](../../../assets/images/project-4.jpg)
 
 **Note:** This case study is entirely fictional and created for the purpose of showcasing [Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/).
 

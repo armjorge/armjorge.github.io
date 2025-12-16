@@ -3,7 +3,7 @@ import hero from '../assets/images/hero.jpg';
 import type { SiteConfig } from '../types';
 
 const siteConfig: SiteConfig = {
-    website: 'armjorge.github.io',
+    website: 'https://armjorge.github.io',
     avatar: {
         src: avatar,
         alt: 'Ethan Donovan'

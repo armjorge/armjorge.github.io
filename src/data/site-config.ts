@@ -45,25 +45,18 @@ const siteConfig: SiteConfig = {
         {
             text: 'Terms',
             href: '/terms'
-        },
-        {
-            text: 'Download theme',
-            href: 'https://github.com/JustGoodUI/dante-astro-theme'
         }
     ],
     socialLinks: [
         {
-            text: 'Dribbble',
-            href: 'https://dribbble.com/'
+            text: 'LinkedIn',
+            href: 'https://mx.linkedin.com/in/jorge-armando-cuaxospa'
         },
         {
             text: 'Instagram',
             href: 'https://instagram.com/'
         },
-        {
-            text: 'X/Twitter',
-            href: 'https://twitter.com/'
-        }
+
     ],
     hero: {
         title: 'Hi There & Welcome to My Corner of the Web!',

@@ -4,7 +4,17 @@ import ThemeToggle from './ThemeToggle.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import siteConfig from '../data/site-config';
 
-const navLinks = siteConfig.headerNavLinks ?? [];
+interface Props {
+    lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+const baseNavLinks = siteConfig.headerNavLinks ?? [];
+// Map nav links - only add lang prefix to language-specific pages
+const navLinks = baseNavLinks.map((link) => ({
+    ...link,
+    href: link.href === '/' ? `/${lang}/about` : link.href
+}));
 ---
 
 <nav class="relative min-h-10 pt-4 pb-12 sm:min-h-14 sm:pb-24 md:pt-8" aria-label="Primary navigation">
@@ -28,6 +38,7 @@ const navLinks = siteConfig.headerNavLinks ?? [];
                             <NavLink
                                 class="text-main font-serif text-xl hover:underline hover:decoration-1 hover:underline-offset-2 md:text-base"
                                 href={link.href}
+                                data-home-link={link.href.includes('/about') ? 'true' : undefined}
                             >
                                 {link.text}
                             </NavLink>
@@ -106,4 +117,19 @@ const navLinks = siteConfig.headerNavLinks ?? [];
     }
     menuToggle();
     document.addEventListener('astro:after-swap', menuToggle);
+</script>
+
+<script is:inline>
+    function updateNavLinks() {
+        const currentLang = window.currentLang || 'en';
+        document.querySelectorAll('a[data-home-link]').forEach(link => {
+            link.href = '/' + currentLang + '/about';
+        });
+    }
+    
+    // Run on load
+    updateNavLinks();
+    
+    // Also run after view transitions
+    document.addEventListener('astro:after-swap', updateNavLinks);
 </script>

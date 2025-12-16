@@ -1,5 +1,6 @@
 ---
 title: Front-End Techniques for Optimizing Website Performance
+lang: en
 excerpt: Slow-loading websites can frustrate users, affect search engine rankings, and ultimately lead to loss of traffic and revenue. Front-end optimization is the key to ensuring a fast, responsive, and user-friendly website.
 publishDate: 'October 12 2023'
 tags:
@@ -7,11 +8,11 @@ tags:
   - Web development
 seo:
   image:
-    src: '../../assets/images/post-9.jpg'
+    src: '../../../assets/images/post-9.jpg'
     alt: Mountains
 ---
 
-![Mountains](../../assets/images/post-9.jpg)
+![Mountains](../../../assets/images/post-9.jpg)
 
 **Note:** This post was created using Chat GPT to demonstrate the features of the _[Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/)_.
 

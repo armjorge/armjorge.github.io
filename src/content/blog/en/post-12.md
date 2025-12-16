@@ -1,5 +1,6 @@
 ---
 title: Unleashing the Power of Tailwind CSS
+lang: en
 excerpt: In the ever-evolving world of web development, staying on top of the latest trends and tools is essential. One such tool that has gained immense popularity in recent years is Tailwind CSS.
 publishDate: 'Jan 02 2024'
 tags:
@@ -8,11 +9,11 @@ tags:
   - CSS
 seo:
   image:
-    src: '../../assets/images/post-12.jpg'
+    src: '../../../assets/images/post-12.jpg'
     alt: Wind turbine
 ---
 
-![Wind turbine](../../assets/images/post-12.jpg)
+![Wind turbine](../../../assets/images/post-12.jpg)
 
 **Note:** This post was created using Chat GPT to demonstrate the features of the _[Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/)_.
 

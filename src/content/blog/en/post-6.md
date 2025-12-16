@@ -1,5 +1,6 @@
 ---
 title: 'The Evolution of Front-End Development: A Journey Through Time'
+lang: en
 excerpt: Choosing the right framework for your web project is a critical decision that can significantly impact the development process and the success of your project. With so many options available, it's essential to consider various factors before making a choice.
 publishDate: 'October 9 2023'
 tags:
@@ -7,11 +8,11 @@ tags:
   - Guide
 seo:
   image:
-    src: '../../assets/images/post-6.jpg'
+    src: '../../../assets/images/post-6.jpg'
     alt: Walking person silhouette
 ---
 
-![Walking person silhouette](../../assets/images/post-6.jpg)
+![Walking person silhouette](../../../assets/images/post-6.jpg)
 
 **Note:** This post was created using Chat GPT to demonstrate the features of the _[Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/)_.
 

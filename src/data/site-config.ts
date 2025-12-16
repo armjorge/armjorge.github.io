@@ -36,15 +36,15 @@ const siteConfig: SiteConfig = {
     footerNavLinks: [
         {
             text: 'About',
-            href: '/en/about'
+            href: '/about'
         },
         {
             text: 'Contact',
-            href: '/en/contact'
+            href: '/contact'
         },
         {
             text: 'Terms',
-            href: '/en/terms'
+            href: '/terms'
         }
     ],
     socialLinks: [

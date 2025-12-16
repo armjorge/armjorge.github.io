@@ -1,5 +1,6 @@
 ---
 title: Exploring the Future of Front-End Development with Astro.js
+lang: en
 excerpt: In recent years, we've seen the rise of various tools and frameworks that have revolutionized the way we build web applications. One such exciting addition to the front-end development landscape is Astro.js.
 publishDate: 'October 10 2023'
 tags:
@@ -8,11 +9,11 @@ tags:
   - Web development
 seo:
   image:
-    src: '../../assets/images/post-7.jpg'
+    src: '../../../assets/images/post-7.jpg'
     alt: Bright lines on a dark background
 ---
 
-![Bright lines on a dark background](../../assets/images/post-7.jpg)
+![Bright lines on a dark background](../../../assets/images/post-7.jpg)
 
 **Note:** This post was created using Chat GPT to demonstrate the features of the _[Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/)_.
 

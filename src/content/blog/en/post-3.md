@@ -1,5 +1,6 @@
 ---
 title: Communication and Collaboration for Front-End Developers
+lang: en
 excerpt: Front-end development is not just about writing code; it's also about working seamlessly with others to create outstanding user experiences.
 publishDate: 'October 6 2023'
 tags:
@@ -8,11 +9,11 @@ tags:
   - Web development
 seo:
   image:
-    src: '../../assets/images/post-3.jpg'
+    src: '../../../assets/images/post-3.jpg'
     alt: Beach ocean shore
 ---
 
-![Beach ocean shore](../../assets/images/post-3.jpg)
+![Beach ocean shore](../../../assets/images/post-3.jpg)
 
 **Note:** This post was created using Chat GPT to demonstrate the features of the _[Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/)_.
 

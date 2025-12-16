@@ -10,10 +10,7 @@ function computeHref(target: string) {
   let slugParts = parts;
   if (languages.includes(parts[0] as any)) slugParts = parts.slice(1);
   const slug = slugParts.length ? slugParts.join('/') : 'about';
-  const base = slug.split('/')[0];
-  const allowed = ['about', 'contact', 'terms'];
-  const finalSlug = allowed.includes(base) ? slug : 'about';
-  return `/${target}/${finalSlug}`;
+  return `/${target}/${slug}`;
 }
 
 const currentSeg = (Astro.url?.pathname.split('/')[1] ?? '') as typeof languages[number] | '';
@@ -23,6 +20,8 @@ const currentLang = languages.includes(currentSeg as any) ? (currentSeg as any) 
   {languages.map((lang) => (
     <a
       href={computeHref(lang)}
+      data-lang={lang}
+      onclick={`localStorage.setItem('preferred-lang', '${lang}'); return true;`}
       class={`px-2 py-1 text-xs border rounded hover:underline ${lang === currentLang ? 'font-semibold' : ''}`}
       aria-current={lang === currentLang ? 'true' : 'false'}
     >

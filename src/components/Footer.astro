@@ -1,8 +1,18 @@
 ---
 import siteConfig from '../data/site-config';
 
+interface Props {
+    lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
 const socialLinks = siteConfig.socialLinks ?? [];
-const navLinks = siteConfig.footerNavLinks ?? [];
+const baseNavLinks = siteConfig.footerNavLinks ?? [];
+// Prepend lang to footer nav links
+const navLinks = baseNavLinks.map((link) => ({
+    ...link,
+    href: `/${lang}${link.href}`
+}));
 const currentYear = new Date().getFullYear();
 ---
 
@@ -10,11 +20,17 @@ const currentYear = new Date().getFullYear();
     {
         navLinks.length > 0 && (
             <nav class="mb-4 flex flex-wrap gap-x-6 gap-y-1" aria-label="Footer navigation">
-                {navLinks.map((link) => (
-                    <a class="font-serif hover:underline hover:underline-offset-2" href={link.href}>
+                {navLinks.map((link) => {
+                    const baseHref = link.href.replace(/^\/(?:en|es|fr)/, '');
+                    return (
+                    <a 
+                        class="font-serif hover:underline hover:underline-offset-2" 
+                        href={link.href}
+                        data-footer-link={baseHref}
+                    >
                         {link.text}
                     </a>
-                ))}
+                );})}
             </nav>
         )
     }
@@ -46,3 +62,21 @@ const currentYear = new Date().getFullYear();
         </p>
     </div>
 </footer>
+
+<script is:inline>
+    function updateFooterLinks() {
+        const currentLang = window.currentLang || 'en';
+        document.querySelectorAll('a[data-footer-link]').forEach(link => {
+            const baseHref = link.getAttribute('data-footer-link');
+            if (baseHref) {
+                link.href = '/' + currentLang + baseHref;
+            }
+        });
+    }
+    
+    // Run on load
+    updateFooterLinks();
+    
+    // Also run after view transitions
+    document.addEventListener('astro:after-swap', updateFooterLinks);
+</script>

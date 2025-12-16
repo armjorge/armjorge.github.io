@@ -1,5 +1,6 @@
 ---
 title: 'Ensuring Cross-Browser Compatibility for a Seamless User Experience'
+lang: en
 excerpt: A website that functions flawlessly across different browsers not only enhances user satisfaction but also broadens its reach.
 publishDate: 'October 7 2023'
 tags:
@@ -8,11 +9,11 @@ tags:
   - Web development
 seo:
   image:
-    src: '../../assets/images/post-4.jpg'
+    src: '../../../assets/images/post-4.jpg'
     alt: Wavy lines on a dark background
 ---
 
-![Wavy lines on a dark background](../../assets/images/post-4.jpg)
+![Wavy lines on a dark background](../../../assets/images/post-4.jpg)
 
 **Note:** This post was created using Chat GPT to demonstrate the features of the _[Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/)_.
 

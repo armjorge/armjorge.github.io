@@ -17,6 +17,51 @@ const lang = ['en', 'es', 'fr'].includes(firstSeg) ? firstSeg : 'en';
 <html lang={lang} class="wrap-break-words antialiased">
     <head>
         <BaseHead {...head} />
+        <script is:inline>
+            // Function to update current language from URL
+            function updateCurrentLanguage() {
+                const languages = ['en', 'es', 'fr'];
+                const path = window.location.pathname;
+                const parts = path.split('/').filter(Boolean);
+                const urlLang = languages.includes(parts[0]) ? parts[0] : null;
+                window.currentLang = urlLang || 'en';
+            }
+            
+            // Language persistence and global language variable
+            (function () {
+                const languages = ['en', 'es', 'fr'];
+                const path = window.location.pathname;
+                const parts = path.split('/').filter(Boolean);
+                const urlLang = languages.includes(parts[0]) ? parts[0] : null;
+                const preferredLang = localStorage.getItem('preferred-lang');
+                
+                // Set global current language for use in components
+                updateCurrentLanguage();
+                
+                // Auto-redirect if language preference doesn't match URL
+                if (preferredLang && languages.includes(preferredLang) && urlLang !== preferredLang) {
+                    let newPath = path;
+                    if (urlLang) {
+                        newPath = '/' + parts.slice(1).join('/');
+                    }
+                    if (!newPath.startsWith('/')) {
+                        newPath = '/' + newPath;
+                    }
+                    newPath = '/' + preferredLang + newPath;
+                    if (newPath !== path) {
+                        window.location.pathname = newPath;
+                    }
+                }
+                
+                // Auto-save if on language page without preference
+                if (urlLang && !preferredLang) {
+                    localStorage.setItem('preferred-lang', urlLang);
+                }
+            })();
+            
+            // Update language after view transitions (for ClientRouter)
+            document.addEventListener('astro:after-swap', updateCurrentLanguage);
+        </script>
         <script>
             if (localStorage.theme === 'dark') {
                 document.documentElement.classList.add('dark');
@@ -27,12 +72,12 @@ const lang = ['en', 'es', 'fr'].includes(firstSeg) ? firstSeg : 'en';
     </head>
     <body class="bg-main text-main">
         <div class="flex min-h-screen flex-col px-4 md:px-8">
-            <Nav />
+            <Nav lang={lang} />
             {showHeader && <Header />}
             <main class="mx-auto w-full max-w-3xl grow">
                 <slot />
             </main>
-            <Footer />
+            <Footer lang={lang} />
         </div>
     </body>
 </html>

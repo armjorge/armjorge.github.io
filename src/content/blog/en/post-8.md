@@ -1,5 +1,6 @@
 ---
 title: 'Unveiling the Magic: Exploring the Latest CSS Features'
+lang: en
 excerpt: 'Highlight and explain the newest CSS features or updates. Include examples and demonstrate how these features can enhance the styling and layout of web pages.'
 publishDate: 'October 11 2023'
 tags:
@@ -8,11 +9,11 @@ tags:
 isFeatured: true
 seo:
   image:
-    src: '../../assets/images/post-8.jpg'
+    src: '../../../assets/images/post-8.jpg'
     alt: Light lines on a dark background
 ---
 
-![Light lines on a dark background](../../assets/images/post-8.jpg)
+![Light lines on a dark background](../../../assets/images/post-8.jpg)
 
 **Note:** This post was created using Chat GPT to demonstrate the features of the _[Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/)_.
 

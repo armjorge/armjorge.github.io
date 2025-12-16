@@ -1,5 +1,6 @@
 ---
 title: The Ultimate Front-End Developer Career Roadmap
+lang: en
 excerpt: Are you interested in embarking on a rewarding career as a front-end developer or looking to advance your existing skills in this dynamic field?
 publishDate: 'Dec 15 2023'
 tags:
@@ -7,11 +8,11 @@ tags:
   - Guide
 seo:
   image:
-    src: '../../assets/images/post-11.jpg'
+    src: '../../../assets/images/post-11.jpg'
     alt: Empty road into the Horizon
 ---
 
-![Empty road into the Horizon](../../assets/images/post-11.jpg)
+![Empty road into the Horizon](../../../assets/images/post-11.jpg)
 
 **Note:** This post was created using Chat GPT to demonstrate the features of the _[Dante Astro.js theme functionality](https://justgoodui.com/astro-themes/dante/)_.
 

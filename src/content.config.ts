@@ -50,6 +50,7 @@ const projects = defineCollection({
             description: z.string().optional(),
             publishDate: z.coerce.date(),
             isFeatured: z.boolean().default(false),
+            lang: z.enum(['en', 'es', 'fr']).optional(),
             seo: seoSchema(image).optional()
         })
 });

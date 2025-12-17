@@ -1,11 +1,12 @@
 ---
-import siteConfig from '../data/site-config';
+import { getSiteConfig } from '../data/site-config';
 
 interface Props {
     lang?: string;
 }
 
 const { lang = 'en' } = Astro.props;
+const siteConfig = getSiteConfig(lang);
 const socialLinks = siteConfig.socialLinks ?? [];
 const baseNavLinks = siteConfig.footerNavLinks ?? [];
 // Prepend lang to footer nav links

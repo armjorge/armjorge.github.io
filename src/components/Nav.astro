@@ -2,13 +2,14 @@
 import NavLink from './NavLink.astro';
 import ThemeToggle from './ThemeToggle.astro';
 import LanguageSwitcher from './LanguageSwitcher.astro';
-import siteConfig from '../data/site-config';
+import { getSiteConfig } from '../data/site-config';
 
 interface Props {
     lang?: string;
 }
 
 const { lang = 'en' } = Astro.props;
+const siteConfig = getSiteConfig(lang);
 const baseNavLinks = siteConfig.headerNavLinks ?? [];
 // Map nav links - only add lang prefix to language-specific pages
 const navLinks = baseNavLinks.map((link) => ({

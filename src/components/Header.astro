@@ -1,7 +1,13 @@
 ---
-import siteConfig from '../data/site-config';
+import { getSiteConfig } from '../data/site-config';
 import CustomImage from './CustomImage.astro';
 
+interface Props {
+    lang?: string;
+}
+
+const { lang = 'en' } = Astro.props as Props;
+const siteConfig = getSiteConfig(lang);
 const titleClass = 'text-theme-foreground font-serif text-2xl leading-tight font-medium sm:text-3xl';
 ---
 

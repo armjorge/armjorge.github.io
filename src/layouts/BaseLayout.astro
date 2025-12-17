@@ -73,7 +73,7 @@ const lang = ['en', 'es', 'fr'].includes(firstSeg) ? firstSeg : 'en';
     <body class="bg-main text-main">
         <div class="flex min-h-screen flex-col px-4 md:px-8">
             <Nav lang={lang} />
-            {showHeader && <Header />}
+            {showHeader && <Header lang={lang} />}
             <main class="mx-auto w-full max-w-3xl grow">
                 <slot />
             </main>

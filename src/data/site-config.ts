@@ -2,13 +2,15 @@ import avatar from '../assets/images/avatar.jpg';
 import hero from '../assets/images/hero.jpg';
 import type { SiteConfig } from '../types';
 
-const siteConfig: SiteConfig = {
+type LangKey = 'en' | 'es' | 'fr';
+
+const baseConfig: SiteConfig = {
     website: 'https://armjorge.github.io',
     avatar: {
         src: avatar,
-        alt: 'Ethan Donovan'
+        alt: 'Jorge Armando Cuaxospa Jiménez'
     },
-    title: 'Dante',
+    title: 'J. A. Cuaxospa Jiménez - Business Intelligence',
     subtitle: 'Minimal Astro.js theme',
     description: 'Astro.js and Tailwind CSS theme for blog and portfolio by justgoodui.com',
     image: {
@@ -16,47 +18,19 @@ const siteConfig: SiteConfig = {
         alt: 'Dante - Astro.js and Tailwind CSS theme'
     },
     headerNavLinks: [
-        {
-            text: 'Home',
-            href: '/'
-        },
-        {
-            text: 'Projects',
-            href: '/projects'
-        },
-        {
-            text: 'Blog',
-            href: '/blog'
-        },
-        {
-            text: 'Tags',
-            href: '/tags'
-        }
+        { text: 'Home', href: '/' },
+        { text: 'Projects', href: '/projects' },
+        { text: 'Blog', href: '/blog' },
+        { text: 'Tags', href: '/tags' }
     ],
     footerNavLinks: [
-        {
-            text: 'About',
-            href: '/about'
-        },
-        {
-            text: 'Contact',
-            href: '/contact'
-        },
-        {
-            text: 'Terms',
-            href: '/terms'
-        }
+        { text: 'About', href: '/about' },
+        { text: 'Contact', href: '/contact' },
+        { text: 'Terms', href: '/terms' }
     ],
     socialLinks: [
-        {
-            text: 'LinkedIn',
-            href: 'https://mx.linkedin.com/in/jorge-armando-cuaxospa'
-        },
-        {
-            text: 'Instagram',
-            href: 'https://instagram.com/'
-        },
-
+        { text: 'LinkedIn', href: 'https://mx.linkedin.com/in/jorge-armando-cuaxospa' },
+        { text: 'Discord', href: 'https://discord.com/armjorge' }
     ],
     hero: {
         title: 'Hi There & Welcome to My Corner of the Web!',
@@ -65,12 +39,7 @@ const siteConfig: SiteConfig = {
             src: hero,
             alt: 'A person sitting at a desk in front of a computer'
         },
-        actions: [
-            {
-                text: 'Get in Touch',
-                href: '/contact'
-            }
-        ]
+        actions: [{ text: 'Get in Touch', href: '/contact' }]
     },
     subscribe: {
         enabled: true,
@@ -84,4 +53,41 @@ const siteConfig: SiteConfig = {
     projectsPerPage: 8
 };
 
-export default siteConfig;
+const siteConfigs: Record<LangKey, SiteConfig> = {
+    en: baseConfig,
+    es: {
+        ...baseConfig,
+        title: 'J. A. Cuaxospa Jiménez - Inteligencia de Negocios',
+        headerNavLinks: [
+            { text: 'Inicio', href: '/' },
+            { text: 'Proyectos', href: '/projects' },
+            { text: 'Blog', href: '/blog' },
+            { text: 'Etiquetas', href: '/tags' }
+        ],
+        footerNavLinks: [
+            { text: 'Acerca de', href: '/about' },
+            { text: 'Contacto', href: '/contact' },
+            { text: 'Términos', href: '/terms' }
+        ]
+    },
+    fr: {
+        ...baseConfig,
+        title: 'J. A. Cuaxospa Jiménez - Intelligence d’Affaires',
+        headerNavLinks: [
+            { text: 'Accueil', href: '/' },
+            { text: 'Projets', href: '/projects' },
+            { text: 'Blog', href: '/blog' },
+            { text: 'Tags', href: '/tags' }
+        ],
+        footerNavLinks: [
+            { text: 'À propos', href: '/about' },
+            { text: 'Contact', href: '/contact' },
+            { text: 'Conditions', href: '/terms' }
+        ]
+    }
+};
+
+export const getSiteConfig = (lang: string = 'en'): SiteConfig => siteConfigs[(lang as LangKey)] ?? siteConfigs.en;
+
+// Keep default export for existing imports (defaults to English)
+export default siteConfigs.en;

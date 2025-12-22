@@ -4,10 +4,10 @@ page: about
 title: About Me
 seo:
   title: About Me
-  description: Market intelligence and end-to-end analytics: data automation, SQL/NoSQL modeling, statistics, and dashboards that drive decisions.
+  description: "Market intelligence and end-to-end analytics: data automation, SQL/NoSQL modeling, statistics, and dashboards that drive decisions."
   image:
     src: '../../../assets/images/about.jpg'
-    alt: Portrait of the author wearing a black blazer at night on a city street, with blurred lights in the background.
+    alt: "Portrait of the author wearing a black blazer at night on a city street, with blurred lights in the background."
 ---
 
 ![Portrait of the author wearing a black blazer at night on a city street, with blurred lights in the background.](../../../assets/images/about.jpg)

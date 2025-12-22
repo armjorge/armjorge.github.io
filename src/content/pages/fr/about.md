@@ -4,10 +4,10 @@ page: about
 title: À propos de moi
 seo:
   title: À propos de moi
-  description: Intelligence de marché et data analytics de bout en bout : automatisation, modélisation SQL/NoSQL, statistiques et dashboards pour décider.
+  description: "Intelligence de marché et data analytics de bout en bout : automatisation, modélisation SQL/NoSQL, statistiques et dashboards pour décider."
   image:
     src: '../../../assets/images/about.jpg'
-    alt: Portrait de l’auteur en blazer noir, de nuit dans une rue éclairée, avec des lumières floues en arrière‑plan.
+    alt: "Portrait de l’auteur en blazer noir, de nuit dans une rue éclairée, avec des lumières floues en arrière-plan."
 
 ---
 

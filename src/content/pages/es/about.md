@@ -4,10 +4,10 @@ page: about
 title: Acerca de mí
 seo:
   title: Acerca de mí
-  description: Inteligencia de mercado y analítica end‑to‑end: automatización de datos, modelado SQL/NoSQL, estadística y dashboards para decisiones de negocio.
+  description: "Inteligencia de mercado y analítica end-to-end: automatización de datos, modelado SQL/NoSQL, estadística y dashboards para decisiones de negocio."
   image:
     src: '../../../assets/images/about.jpg'
-    alt: Retrato del autor con blazer negro, de noche en una calle iluminada; fondo con luces desenfocadas.
+    alt: "Retrato del autor con blazer negro, de noche en una calle iluminada; fondo con luces desenfocadas."
 ---
 
 ![Retrato del autor con blazer negro, de noche en una calle iluminada; fondo con luces desenfocadas.](../../../assets/images/about.jpg)

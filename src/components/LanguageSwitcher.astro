@@ -10,6 +10,7 @@ function computeHref(target: string) {
   let slugParts = parts;
   if (languages.includes(parts[0] as any)) slugParts = parts.slice(1);
   const slug = slugParts.length ? slugParts.join('/') : 'about';
+  // All languages use /{lang}/ prefix
   return `/${target}/${slug}`;
 }
 

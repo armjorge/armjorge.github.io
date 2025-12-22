@@ -20,8 +20,8 @@ const baseConfig: SiteConfig = {
     headerNavLinks: [
         { text: 'Home', href: '/' },
         { text: 'Projects', href: '/projects' },
-        { text: 'Blog', href: '/blog' },
-        { text: 'Tags', href: '/tags' }
+        //{ text: 'Blog', href: '/blog' },
+        //{ text: 'Tags', href: '/tags' }
     ],
     footerNavLinks: [
         { text: 'About', href: '/about' },
@@ -59,10 +59,10 @@ const siteConfigs: Record<LangKey, SiteConfig> = {
         ...baseConfig,
         title: 'J. A. Cuaxospa Jiménez - Inteligencia de Negocios',
         headerNavLinks: [
-            { text: 'Inicio', href: '/' },
+            { text: 'Inicio', href: '/about' },
             { text: 'Proyectos', href: '/projects' },
-            { text: 'Blog', href: '/blog' },
-            { text: 'Etiquetas', href: '/tags' }
+            //{ text: 'Blog', href: '/blog' },
+            // { text: 'Etiquetas', href: '/tags' }
         ],
         footerNavLinks: [
             { text: 'Acerca de', href: '/about' },
@@ -72,12 +72,12 @@ const siteConfigs: Record<LangKey, SiteConfig> = {
     },
     fr: {
         ...baseConfig,
-        title: 'J. A. Cuaxospa Jiménez - Intelligence d’Affaires',
+        title: 'J. A. Cuaxospa Jiménez - Intelligence d\'Affaires',
         headerNavLinks: [
-            { text: 'Accueil', href: '/' },
+            { text: 'Accueil', href: '/about' },
             { text: 'Projets', href: '/projects' },
-            { text: 'Blog', href: '/blog' },
-            { text: 'Tags', href: '/tags' }
+            //{ text: 'Blog', href: '/blog' },
+            //{ text: 'Tags', href: '/tags' }
         ],
         footerNavLinks: [
             { text: 'À propos', href: '/about' },

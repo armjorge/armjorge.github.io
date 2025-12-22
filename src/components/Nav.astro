@@ -11,10 +11,10 @@ interface Props {
 const { lang = 'en' } = Astro.props;
 const siteConfig = getSiteConfig(lang);
 const baseNavLinks = siteConfig.headerNavLinks ?? [];
-// Map nav links - only add lang prefix to language-specific pages
+// Map nav links - add lang prefix to all links
 const navLinks = baseNavLinks.map((link) => ({
     ...link,
-    href: link.href === '/' ? `/${lang}/about` : link.href
+    href: link.href === '/' ? `/${lang}/about` : `/${lang}${link.href}`
 }));
 ---
 

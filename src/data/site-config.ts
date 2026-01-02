@@ -30,7 +30,8 @@ const baseConfig: SiteConfig = {
     ],
     socialLinks: [
         { text: 'LinkedIn', href: 'https://mx.linkedin.com/in/jorge-armando-cuaxospa' },
-        { text: 'Discord', href: 'https://discord.com/armjorge' }
+        { text: 'Email', href: 'mailto:armjorge@gmail.com' }
+
     ],
     hero: {
         title: 'Hi There & Welcome to My Corner of the Web!',

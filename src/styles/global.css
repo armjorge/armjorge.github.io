@@ -13,6 +13,58 @@
     --bg-muted: #eae9e1;
     --border-main: #171717;
 }
+.table-viz {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin: 1rem 0;
+}
+
+html.dark .table-viz {
+  border-color: var(--border-main);
+  background-color: var(--bg-muted);
+  box-shadow: 0 2px 4px rgba(255,255,255,0.1);
+}
+
+table.table-viz {
+  width: auto;
+  border-collapse: collapse;
+}
+
+table.table-viz th, table.table-viz td {
+  padding: 0.5rem;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+html.dark table.table-viz th, html.dark table.table-viz td {
+  border-bottom-color: var(--border-main);
+}
+
+table.table-viz th {
+  background-color: #e0e0e0;
+  font-weight: bold;
+}
+
+html.dark table.table-viz th {
+  background-color: #444;
+  color: #f0f0f0;
+}
+.hashtag {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 0.2em 0.5em;
+  border-radius: 0.3em;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+html.dark .hashtag {
+  background-color: #444;
+  color: #f0f0f0;}
+
 html.dark {
     --text-main: #f2f1ec;
     --bg-main: #171717;
@@ -78,14 +130,18 @@ html.dark {
         --tw-prose-code: var(--text-color-main);
         --tw-prose-th-borders: var(--border-color-main);
         --tw-prose-td-borders: var(--border-color-main);
+        line-height: 1.5;
     }
-
+    .prose ul, .prose ol {
+        line-height: 1.4; /* Single line spacing for lists */
+    }
     .prose a {
         @apply underline font-normal decoration-1 underline-offset-2 decoration-dashed hover:decoration-solid;
     }
 
     .prose :where(h1, h2, h3, h4, h5, h6) {
         @apply font-serif font-medium;
+        line-height: 1.1;
     }
 
     .prose :where(code, strong) {
@@ -93,6 +149,8 @@ html.dark {
     }
 
     .prose blockquote {
-        @apply font-serif font-normal italic border-none pl-0 text-[1.375em] leading-snug sm:text-[1.66667em];
+      @apply font-serif font-normal italic border-none pl-0 text-[1.375em] leading-snug sm:text-[1.66667em];
+      margin: 0;
+      text-align: center;
     }
 }

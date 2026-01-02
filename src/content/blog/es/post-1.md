@@ -1,16 +1,18 @@
 ---
-title: Las Ventajas y Desventajas de Trabajar desde Casa
+title: Análisis de las compras gubernamentales 2023-2028
 excerpt: En los últimos años, la forma en que trabajamos ha cambiado significativamente...
 publishDate: 'Aug 5 2023'
 lang: es
 tags:
-  - Guía
+  - Looker
+  - Visualization tools
+  - Insights
 seo:
   image:
-    src: '../../../assets/images/post-1.jpg'
+    src: '../../../assets/images/Looker_market_analysis.png'
     alt: Una persona mirando por la ventana
 ---
 
-![Una persona mirando por la ventana](../../../assets/images/post-1.jpg)
+![Una persona mirando por la ventana](../../../assets/images/Looker_market_analysis.png)
 
-Este es un artículo de blog en español. Contenido próximamente.
+

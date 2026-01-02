@@ -1,0 +1,30 @@
+---
+title: 'Pipeline de datos farmacéuticos: Arquitectura Medallion'
+description: 'Integración de fuentes heterogéneas para análisis de compras públicas'
+publishDate: 'Jan 2 2023'
+skills:
+  - Databrick
+  - Data Analysis
+  - Medallion Architecture
+lang: es
+seo:
+  image:
+    src: '../../../../public/assets/images/databricks_pipeline.png'
+    alt: Databricks pipeline
+---
+
+## Problema
+
+
+
+## De dónde surgió el problema 
+
+El Gobierno de México compra sus medicamentos y dispositivos médicos a cientos de proveedores. Cada producto tiene un identificador único. 
+
+En cada compra, decenas de instituciones comparten para cada identificador la cantidad que estiman que van a consumir en periodos de tiempo de 2 años, posteriormente las juntan y esta relación de piezas por cada identificador la llamanda 'demanda agregada'.
+
+![Pipeline Databricks](../../../../public/assets/images/databricks_pipeline.png|90)
+
+Los proveedores pueden consultar la demanda agregada de cada compra. No pueden ofertar fracciones de la misma, y en caso de ganar un producto y no poder entregar, son sujetos a sanciones o inhabilitaciones.
+
+El conjunto de datos de 'demanda agregada' cambia compra contra compra en estructura y detalle, por lo que para elegir qué 

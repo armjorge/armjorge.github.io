@@ -11,7 +11,7 @@ seo:
 
 ---
 
-![Portrait de l’auteur en blazer noir, de nuit dans une rue éclairée, avec des lumières floues en arrière‑plan.](../../../assets/images/about.jpg)
+![Portrait de l’auteur en blazer noir, de nuit dans une rue éclairée, avec des lumières floues en arrière‑plan.](../../../../public/assets/images/about.jpg|30)
 
 Bonjour, je m’appelle **Armando**. Je suis passionné par l’**intelligence de marché** et la **data**. Je couvre le cycle **de bout en bout** : extraction et automatisation depuis des sources hétérogènes, conception d’architectures **SQL/NoSQL**, **statistiques**, puis mise en récit via des dashboards pour soutenir la décision.
 

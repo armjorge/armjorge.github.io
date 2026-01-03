@@ -6,11 +6,11 @@ seo:
   title: About Me
   description: "Market intelligence and end-to-end analytics: data automation, SQL/NoSQL modeling, statistics, and dashboards that drive decisions."
   image:
-    src: '../../../../public/assets/images/about.jpg'
+    src: '../../../assets/images/about.jpg'
     alt: "Portrait of the author wearing a black blazer at night on a city street, with blurred lights in the background."
 ---
 
-![Portrait of the author wearing a black blazer at night on a city street, with blurred lights in the background](../../../../public/assets/images/about.jpg|30)
+![Portrait of the author wearing a black blazer at night on a city street, with blurred lights in the background](../../../assets/images/about.jpg)
 
 Hi, I’m **Armando**. I’m passionate about **business intelligence** and building **end‑to‑end analytics**: from extracting and automating data from heterogeneous sources, to designing **SQL/NoSQL** data stores, applying **statistics**, and turning insights into dashboards that support real decisions.
 

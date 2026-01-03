@@ -10,7 +10,7 @@ seo:
     alt: "Retrato del autor con blazer negro, de noche en una calle iluminada; fondo con luces desenfocadas."
 ---
 
-![Retrato del autor con blazer negro, de noche en una calle iluminada; fondo con luces desenfocadas.](../../../../public/assets/images/about.jpg|30)
+![Retrato del autor con blazer negro, de noche en una calle iluminada; fondo con luces desenfocadas.](../../../assets/images/about.jpg)
 
 Hola, soy **Armando**. Me dedico a la **inteligencia de mercado** y a construir analítica **end‑to‑end**: desde extraer datos de fuentes heterogéneas y automatizar su actualización, hasta diseñar **almacenes de datos** (SQL/NoSQL), aplicar **estadística** y convertir hallazgos en decisiones accionables.
 

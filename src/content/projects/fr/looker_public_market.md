@@ -67,7 +67,7 @@ Une vue consolidée résumant les quantités par code à travers les trois proc�
 
 ## Résultats
 
-![Tableau de bord d'analyse](../../../../public/assets/images/Looker_market_analysis.png|60)
+![Tableau de bord d'analyse](../../../assets/images/Looker_market_analysis.png)
 
 Un tableau de bord interactif qui permet aux fabricants de :
 - Identifier les tendances de croissance ou de déclin par produit

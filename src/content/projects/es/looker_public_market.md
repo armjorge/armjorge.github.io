@@ -10,7 +10,7 @@ skills:
 lang: es
 seo:
   image:
-    src: '../../../../public/assets/images/Looker_market_analysis.png'
+    src: '../../../assets/images/Looker_market_analysis.png'
     alt: Vista previa del proyecto
 ---
 
@@ -68,7 +68,7 @@ Una vista consolidada que resume las cantidades por clave en los tres procedimie
 
 ## Resultado
 
-![Tablero de análisis](../../../../public/assets/images/Looker_market_analysis.png|60)
+![Tablero de análisis](../../../assets/images/Looker_market_analysis.png)
 
 
 Un tablero interactivo que permite a los fabricantes:

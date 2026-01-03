@@ -13,4 +13,4 @@ E-mail :
 Envoyez un message à [armjorge@gmail.com](mailto:armjorge@gmail.com) et je vous répondrai dès que possible.
 
 Réseaux sociaux :
-Retrouvez-moi sur [Twitter](https://twitter.com) ou [LinkedIn](https://www.linkedin.com/in/jorge-armando-cuaxospa/).
+Retrouvez-moi sur [LinkedIn](https://www.linkedin.com/in/jorge-armando-cuaxospa/).

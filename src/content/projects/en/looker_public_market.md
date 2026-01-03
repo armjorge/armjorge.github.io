@@ -10,7 +10,7 @@ skills:
 lang: en
 seo:
   image:
-    src: '../../../../public/assets/images/Looker_market_analysis.png'
+    src: '../../../assets/images/Looker_market_analysis.png'
     alt: Vista previa del proyecto
 ---
 
@@ -67,7 +67,7 @@ A consolidated view summarizing quantities by code across the three procurement 
 
 ## Results
 
-![Analysis Dashboard](../../../../public/assets/images/Looker_market_analysis.png|60)
+![Analysis Dashboard](../../../assets/images/Looker_market_analysis.png)
 
 An interactive dashboard that allows manufacturers to:
 - Identify growth or decline trends by product

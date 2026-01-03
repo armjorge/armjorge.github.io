@@ -2,7 +2,9 @@
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 import ProjectPreview from '../../../components/ProjectPreview.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { slugify } from '../../../utils/common-utils'; // ADD THIS LINE
 import { sortItemsByDateDesc } from '../../../utils/data-utils';
+
 
 
 export async function getStaticPaths() {

@@ -15,6 +15,7 @@ const seoSchema = (image: ImageFunction) =>
         pageType: z.enum(['website', 'article']).default('website')
     });
 
+
 const blog = defineCollection({
     loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/blog' }),
     schema: ({ image }) =>
@@ -51,6 +52,7 @@ const projects = defineCollection({
             description: z.string().optional(),
             publishDate: z.coerce.date(),
             isFeatured: z.boolean().default(false),
+            tags: z.array(z.string()).default([]), // ADD THIS LINE
             lang: z.enum(['en', 'es', 'fr']).optional(),
             seo: seoSchema(image).optional()
         })

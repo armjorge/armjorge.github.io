@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import ArrowRight from '../../../../assets/icons/arrow-right.svg';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { getAllProjectTags, getProjectsByTag, sortItemsByDateDesc } from '../../../../utils/data-utils';
+
+const allProjects = (await getCollection('projects', ({ id }) => id.startsWith('en/'))).sort(sortItemsByDateDesc);
+
+const tags = getAllProjectTags(allProjects).sort((tagA, tagB) => {
+    const projectCountTagA = getProjectsByTag(allProjects, tagA.id).length;
+    const projectCountTagB = getProjectsByTag(allProjects, tagB.id).length;
+    return projectCountTagB - projectCountTagA;
+});
+---
+
+<BaseLayout title="Skills" description="Explore skills directory for easy navigation and discovery." showHeader={false}>
+    <h1 class="mb-12 font-serif text-2xl italic sm:mb-16 sm:text-4xl">Skills</h1>
+    {
+        tags.map((tag) => {
+            const projectCount = getProjectsByTag(allProjects, tag.id).length;
+            return (
+                <a class="group mb-10 flex items-start justify-between gap-8 sm:mb-12" href={`/en/projects/tags/${tag.id}`}>
+                    <div class="grow">
+                        <h2 class="font-serif text-xl leading-tight font-medium group-hover:underline group-hover:decoration-dashed group-hover:decoration-1 group-hover:underline-offset-4 sm:text-2xl">
+                            {tag.name}
+                        </h2>
+                        <div class="mt-1 text-sm leading-normal">
+                            {projectCount} {projectCount === 1 ? 'project' : 'projects'}
+                        </div>
+                    </div>
+                    <div class="hidden font-serif italic opacity-0 transition group-hover:opacity-100 sm:inline-flex sm:shrink-0 sm:items-center sm:gap-1">
+                        View projects
+                        <ArrowRight class="size-5 fill-current" />
+                    </div>
+                </a>
+            );
+        })
+    }
+</BaseLayout>

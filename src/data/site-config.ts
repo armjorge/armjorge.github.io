@@ -19,12 +19,12 @@ const baseConfig: SiteConfig = {
         { text: 'Home', href: '/' },
         { text: 'Projects', href: '/projects' },
         //{ text: 'Blog', href: '/blog' },
-        //{ text: 'Tags', href: '/tags' }
+        { text: 'Skills', href: '/projects/tags' }
     ],
     footerNavLinks: [
         { text: 'About', href: '/about' },
         { text: 'Contact', href: '/contact' },
-        { text: 'Terms', href: '/terms' }
+        //{ text: 'Terms', href: '/terms' }
     ],
     socialLinks: [
         { text: 'LinkedIn', href: 'https://mx.linkedin.com/in/jorge-armando-cuaxospa' },
@@ -33,7 +33,7 @@ const baseConfig: SiteConfig = {
     ],
     hero: {
         title: 'Hi There & Welcome to My Corner of the Web!',
-        text: "I'm **Ethan Donovan**, a web developer at Amazing Studio, dedicated to the realms of collaboration and artificial intelligence.\nMy approach involves embracing intuition, conducting just enough research, and leveraging aesthetics as a catalyst for exceptional products.\nI have a profound appreciation for top-notch software, visual design, and the principles of product-led growth.\n\nFeel free to explore some of my coding endeavors on [GitHub](https://github.com/JustGoodUI/dante-astro-theme) or follow me on [Twitter/X](https://twitter.com/justgoodui).",
+        text: ".",
         image: {
             src: '/assets/images/hero.jpg',
             alt: 'A person sitting at a desk in front of a computer'
@@ -61,12 +61,12 @@ const siteConfigs: Record<LangKey, SiteConfig> = {
             { text: 'Inicio', href: '/about' },
             { text: 'Proyectos', href: '/projects' },
             //{ text: 'Blog', href: '/blog' },
-            // { text: 'Etiquetas', href: '/tags' }
+            { text: 'Habilidades', href: '/projects/tags' }
         ],
         footerNavLinks: [
             { text: 'Acerca de', href: '/about' },
             { text: 'Contacto', href: '/contact' },
-            { text: 'Términos', href: '/terms' }
+            //{ text: 'Términos', href: '/terms' }
         ]
     },
     fr: {
@@ -76,12 +76,12 @@ const siteConfigs: Record<LangKey, SiteConfig> = {
             { text: 'Accueil', href: '/about' },
             { text: 'Projets', href: '/projects' },
             //{ text: 'Blog', href: '/blog' },
-            //{ text: 'Tags', href: '/tags' }
+            { text: 'Compétences', href: '/projects/tags' }
         ],
         footerNavLinks: [
             { text: 'À propos', href: '/about' },
             { text: 'Contact', href: '/contact' },
-            { text: 'Conditions', href: '/terms' }
+            //{ text: 'Conditions', href: '/terms' }
         ]
     }
 };

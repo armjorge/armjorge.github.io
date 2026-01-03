@@ -23,3 +23,27 @@ export function getPostsByTag(posts: CollectionEntry<'blog'>[], tagId: string) {
     const filteredPosts: CollectionEntry<'blog'>[] = posts.filter((post) => (post.data.tags || []).map((tag) => slugify(tag)).includes(tagId));
     return filteredPosts;
 }
+
+// Add these new functions for projects
+// PROJECTS SKILLS
+// Add these new functions for projects
+export function getAllProjectTags(projects: CollectionEntry<'projects'>[]) {
+    const tags: string[] = [...new Set(projects.flatMap((project) => project.data.tags || []).filter(Boolean))];
+    return tags
+        .map((tag) => {
+            return {
+                name: tag,
+                id: slugify(tag)
+            };
+        })
+        .filter((obj, pos, arr) => {
+            return arr.map((mapObj) => mapObj.id).indexOf(obj.id) === pos;
+        });
+}
+
+export function getProjectsByTag(projects: CollectionEntry<'projects'>[], tagId: string) {
+    const filteredProjects: CollectionEntry<'projects'>[] = projects.filter((project) =>
+        (project.data.tags || []).map((tag) => slugify(tag)).includes(tagId)
+    );
+    return filteredProjects;
+}

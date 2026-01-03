@@ -2,7 +2,7 @@
 title: 'Pharmaceutical and Medical Supply Demand Analysis for the Government Market 2023-2028'
 description: 'Scalable analysis of public procurement data using BigQuery and Looker Studio'
 publishDate: 'Jan 2 2023'
-skills:
+tags:
   - Databricks
   - SPARK
   - Insights

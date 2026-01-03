@@ -2,7 +2,7 @@
 title: 'Analyse de la demande de médicaments et fournitures pharmaceutiques du marché gouvernemental 2023-2028'
 description: 'Analyse évolutive des données d''approvisionnement public avec BigQuery et Looker Studio'
 publishDate: 'Jan 2 2023'
-skills:
+tags:
   - Databricks
   - SPARK
   - Insights

@@ -2,7 +2,7 @@
 title: 'Análisis de la demanda de medicamentos e insumos farmacéuticos del mercado gubernamental 2023-2028'
 description: 'Análisis escalable de datos de compras públicas con BigQuery y Looker Studio'
 publishDate: 'Jan 2 2023'
-skills:
+tags:
   - Databricks
   - SPARK
   - Insights

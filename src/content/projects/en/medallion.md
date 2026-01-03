@@ -2,7 +2,7 @@
 title: 'Pharmaceutical Data Pipeline: Medallion Architecture'
 description: 'Integrating heterogeneous sources for public procurement analysis'
 publishDate: 'Jan 2 2023'
-skills:
+tags:
   - Databrick
   - Data Analysis
   - Medallion Architecture

@@ -10,6 +10,7 @@ import remarkTableViz from './src/plugins/remark-table-viz.js';
 
 // https://astro.build/config
 export default defineConfig({
+    base: '/armjorge_page/',
     site: siteConfig.website,
     vite: {
         plugins: [tailwindcss()]

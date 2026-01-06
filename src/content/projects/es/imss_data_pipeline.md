@@ -47,7 +47,7 @@ La implementación transformó la cultura operativa de la empresa:
 * **Control Logístico:** Capacidad para supervisar y auditar a dos proveedores logísticos en paralelo mediante KPIs de cumplimiento de entrega automáticos.
 * **Eficiencia de Costos:** Procesamiento de más de 3,000 registros con un costo operativo de nube inferior a **$10 USD mensuales**.
 
-![Workspace Snowflake](../../../assets/images/SnowFlakeWorkspace.png)
+![AWS Snow flake Integration](../../../assets/images/aws_snowflake.gif)
 
 
 ### Lo que este proyecto demuestra de mi perfil:
@@ -56,5 +56,7 @@ La implementación transformó la cultura operativa de la empresa:
 - **Visión de Negocio:** Entiendo que los datos sirven para cobrar más rápido y trabajar con menos fricción.
 - **Optimización de Recursos:** Diseño arquitecturas en la nube que son potentes pero extremadamente económicas.
 
+
+![Workspace Snowflake](../../../assets/images/SnowFlakeWorkspace.png)
 
 ![Snowflake dashboard](../../../assets/images/SnowFlakeDashboard.png)

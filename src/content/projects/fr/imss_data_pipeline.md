@@ -47,7 +47,8 @@ Cette mise en œuvre a transformé la culture opérationnelle de l'entreprise :
 * **Contrôle Logistique :** Capacité de superviser et d'auditer deux prestataires logistiques en parallèle via des KPIs automatisés de conformité de livraison.
 * **Efficacité des Coûts :** Traitement de plus de 3 000 enregistrements avec un coût d'exploitation cloud inférieur à **10 USD par mois**.
 
-![Workspace Snowflake](../../../assets/images/SnowFlakeWorkspace.png)
+![AWS Snow flake Integration](../../../assets/images/aws_snowflake.gif)
+
 
 ### Ce que ce projet démontre de mon profil :
 
@@ -55,4 +56,5 @@ Cette mise en œuvre a transformé la culture opérationnelle de l'entreprise :
 - **Vision Business :** Je comprends que les données servent à encaisser plus rapidement et à travailler avec moins de friction.
 - **Optimisation des Ressources :** Je conçois des architectures cloud puissantes mais extrêmement économiques.
 
+![Workspace Snowflake](../../../assets/images/SnowFlakeWorkspace.png)
 ![Snowflake dashboard](../../../assets/images/SnowFlakeDashboard.png)

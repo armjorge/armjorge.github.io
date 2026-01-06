@@ -46,13 +46,15 @@ The implementation transformed the company's operational culture:
 * **Financial Predictability:** The finance department now has projected cash flows with total precision.
 * **Logistics Control:** Ability to supervise and audit two logistics providers in parallel through automated delivery compliance KPIs.
 * **Cost Efficiency:** Processing over 3,000 records with a cloud operating cost of less than **$10 USD per month**.
+![AWS Snow flake Integration](../../../assets/images/aws_snowflake.gif)
 
-![Workspace Snowflake](../../../assets/images/SnowFlakeWorkspace.png)
+
 
 ### What this project demonstrates about my profile:
 
 - **Problem-Solving Ability:** I don't stop at the lack of an API; I build the necessary bridge.
 - **Business Vision:** I understand that data serves to collect payments faster and work with less friction.
 - **Resource Optimization:** I design cloud architectures that are powerful yet extremely economical.
+![Workspace Snowflake](../../../assets/images/SnowFlakeWorkspace.png)
 
 ![Snowflake dashboard](../../../assets/images/SnowFlakeDashboard.png)

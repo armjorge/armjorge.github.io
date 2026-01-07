@@ -1,5 +1,5 @@
 ---
-title: 'Pharmaceutical and Medical Supply Demand Analysis for the Government Market 2023-2028'
+title: 'Analysis of Pharmaceutical Demand in Mexican Government Procurement 2023-2028'
 description: 'Scalable analysis of public procurement data using BigQuery and Looker Studio'
 publishDate: 'Jan 2 2023'
 tags:
@@ -7,6 +7,8 @@ tags:
   - SPARK
   - Insights
   - Storytelling
+  - Looker Studio
+  - BigQuery
 lang: en
 seo:
   image:
@@ -14,67 +16,116 @@ seo:
     alt: Vista previa del proyecto
 ---
 
-## Problem
+## The Challenge Facing Pharmaceutical Suppliers in Government Procurement
 
-Pharmaceutical and medical supply vendors seeking to sell to government institutions face the challenge of identifying:
-- Which products are purchased?
-- Which institutions purchase each product?
-- How many units are acquired of each one?
-- How has demand changed over time? Is it growing, declining, or is the product being excluded?
+Pharmaceutical and medical supply providers seeking to sell to Mexican government institutions face a constant hurdle: gaining clear visibility into actual public-sector demand.
 
-In December 2025, [procurement information for the 2027-2028 period](https://discusion.salud.gob.mx/) was made public, providing a unique opportunity to plan resources and prioritize product launches. This raises a crucial question:
+The key questions they need answered are:
+- Which products are being purchased?
+- Which institutions buy each product?
+- How many units of each are acquired?
+- How has demand evolved over time? Is the product growing, declining, or even being phased out?
 
-**Which products should we prioritize?**
+In December 2025, the [consolidated procurement information for the 2027-2028 period](https://discusion.salud.gob.mx/) was made public, offering a unique opportunity to plan resources, adjust commercial strategies, and prioritize product launches or registrations.
 
-## Where does the problem originate?
+This leads to the central question:  
+**Which products should we prioritize for the next consolidated purchase?**
 
-The database contains information from 3 biannual procurement procedures with 4,798 unique products distributed across 11 institutions, totaling 12,685,508,417 units purchased. With over 38,000 rows of data, answering these questions requires appropriate technology.
+To answer this rigorously, the new procurement cycle must be compared with the previous two-year procedures:
+1. CC 2023-2024: Consolidated purchase 2023-2024
+2. CC 2025-2026: Consolidated purchase 2025-2026
+3. CC 2027-2028: Consolidated purchase 2027-2028
 
-## Solution
+## Where the Problem Arises
 
-Each product has a unique identifier called **'Basic Catalog Code'** (Clave de cuadro básico) that allows tracking it across procurement procedures.
+The database compiles information from these three biennial procedures, covering **4,798 unique products** across **11 institutions**, with a total volume of **12,685,508,417 units** acquired. This results in more than **38,000 rows** of detailed data. Analyzing this volume manually or with traditional tools is impractical and time-consuming.
 
-### Step 1: Create a master product table
+## Our Solution: A Structured and Scalable Analysis
 
-Since not all procedures include the same codes, we need a table containing all products so the dashboard filters work correctly:
+Each product has a unique identifier called **Clave de cuadro básico** (Basic Schedule Key), enabling consistent tracking across procurement cycles.
 
-| code            | description                                         |
+### Step 1: Master Product Table
+We created a table containing all unique keys from any of the three procedures, ensuring subsequent filters work correctly.
+
+| clave           | descripcion                                         |
 | --------------- | --------------------------------------------------- |
 | 010.000.4301.00 | ERTAPENEM. INJECTABLE SOLUTION. Each vial contains… |
 | 010.000.6357.00 | BUDESONIDE-FORMOTEROL. AEROSOL. Each gram contains… |
-| 010.000.4225.00 | IMATINIB. TABLET. Each coated tablet contains…      |
+| 010.000.4225.00 | IMATINIB. FILM-COATED TABLET. Each tablet contains… |
 
-### Step 2: Integrate with BigQuery and Looker Studio
+This table can be enriched with descriptions in other languages for easy presentation to international stakeholders.
 
-#Looker Studio provides an immediate option for visualization, while BigQuery delivers the engine to make analysis fast and scalable.
+### Step 2: Cross-tab Analytical Table by Institution and Procurement Cycle
+Data is transformed into a pivoted structure ideal for visualization:
 
-The Databricks pipeline construction that generates the database can be found here: [Data Design and Cleaning](../medallion).
+| clave           | comprac      | institucion | totales_max    | totales_institucion |
+| --------------- | ------------ | ----------- | -------------- | ------------------- |
+| 010.000.0104.00 | CC 2027-2028 | IMSS        | 226,092,211.00 | 166,856,793.00      |
+| 010.000.0104.00 | CC 2023-2024 | IMSS        | 145,202,987.00 | 116,783,741.00      |
 
-### Step 3: Analytical table by institution and procedure
+### Step 3: Date Range Table by Procurement Cycle
+| comprac      | date_st    | date_end   |
+| ------------ | ---------- | ---------- |
+| CC 2023-2024 | 2023-01-01 | 2024-12-31 |
+| CC 2025-2026 | 2025-01-01 | 2026-12-31 |
+| CC 2027-2028 | 2027-01-01 | 2028-12-31 |
 
-| code            | purchase     | institution | max_totals     | institution_totals | description                                  |
-| --------------- | ------------ | ----------- | -------------- | ------------------ | -------------------------------------------- |
-| 010.000.0104.00 | CC 2027-2028 | IMSS        | 226,092,211.00 | 166,856,793.00     | PARACETAMOL. TABLET. Each tablet contains... |
-| 010.000.0104.00 | CC 2023-2024 | IMSS        | 145,202,987.00 | 116,783,741.00     | PARACETAMOL. TABLET. Each tablet contains... |
+### Step 4: Integration with BigQuery and Looker Studio
+#LookerStudio provides instant interactive visualization, while #BigQuery delivers a fast, scalable analytical engine.
 
-### Step 4: Pivot table with temporal evolution
+The Databricks processing and data-cleansing pipeline is detailed here: [Data design and cleaning](../medallion).
 
-A consolidated view summarizing quantities by code across the three procurement procedures:
+### Step 5: Enriched View in BigQuery
+We built a view that combines all required information:
 
-| code            | description                                  | max_2023_2024 | max_2025_2026 | max_2027_2028 |
-| --------------- | -------------------------------------------- | ------------- | ------------- | ------------- |
-| 010.000.0246.00 | PROPOFOL. INJECTABLE EMULSION. Each ampoule… | 1,881,146.00  | 2,863,790.00  | 4,345,683.00  |
+```sql
+CREATE OR REPLACE VIEW `project.business_analysis.gold_contribucion_enriched` AS
+SELECT
+  c.*,
+  p.descripcion,
+  d.date_st,
+  d.date_end
+FROM `project.business_analysis.gold_contribucion_p_institucion` c
+LEFT JOIN `project.business_analysis.gold_unique_products` p
+  ON c.clave = p.clave
+LEFT JOIN `project.business_analysis.purchases_date_range` d
+  ON c.comprac = d.comprac;
+```
+### Step 6: Building the Interactive Dashboard
+
+The dashboard enables everyone involved in supply generation to:
+
+- Detect growth or decline trends by product
+- Segment by institution and procurement cycle
+- Make informed decisions on 2027-2028 priorities
+
+Key calculated fields include overall growth between the first and last cycle:
+
+```
+(SUM(CASE WHEN comprac = "CC 2027-2028" THEN totales_institucion ELSE 0 END) 
+- SUM(CASE WHEN comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END))
+/ SUM(CASE WHEN comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END)
+```
+And specific growth for the highest-volume institutions (IMSS and IMSS Bienestar):
+
+```
+-- IMSS Bienestar growth
+(SUM(CASE WHEN institucion = "imss_bienestar" AND comprac = "CC 2027-2028" THEN totales_institucion ELSE 0 END) 
+- SUM(CASE WHEN institucion = "imss_bienestar" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END))
+/ SUM(CASE WHEN institucion = "imss_bienestar" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END)
+```
+
+```
+-- IMSS growth
+(SUM(CASE WHEN institucion = "imss" AND comprac = "CC 2027-2028" THEN totales_institucion ELSE 0 END) 
+- SUM(CASE WHEN institucion = "imss" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END))
+/ SUM(CASE WHEN institucion = "imss" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END)
+```
 
 ## Results
 
-![Analysis Dashboard](../../../assets/images/Looker_market_analysis.png)
-
-An interactive dashboard that allows manufacturers to:
-- Identify growth or decline trends by product
-- Segment information by institution and procurement procedure
-- Make informed decisions about which products to prioritize for 2027-2028
-
-Access the dashboard:
+Access the interactive dashboard here:
 > [Dashboard on Looker](https://lookerstudio.google.com/reporting/c0f3b5c5-c208-4a5a-b81e-9f136d65251e)
 
+![Analysis Dashboard](../../../assets/images/Looker_market_analysis.png)
 

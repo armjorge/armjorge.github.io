@@ -7,6 +7,8 @@ tags:
   - SPARK
   - Insights
   - Storytelling
+  - Looker Studio
+  - BigQuery
 lang: es
 seo:
   image:
@@ -15,29 +17,36 @@ seo:
 ---
 
 
-## Problema
+## El desafío de los proveedores farmacéuticos en las compras gubernamentales
 
-Los proveedores de medicamentos e insumos farmacéuticos que desean venderle a las instituciones de gobierno enfrentan el desafío de identificar:
-- ¿Qué productos se compran? 
-- ¿Qué instituciones compran cada producto?
-- ¿Cuántas piezas se adquieren de cada uno?
-- ¿Cómo ha cambiado la demanda a lo largo del tiempo? ¿Crece, decrece o se excluye el producto?
+Los proveedores de medicamentos e insumos farmacéuticos que buscan vender a instituciones gubernamentales mexicanas enfrentan un reto constante: obtener visibilidad clara sobre la demanda real del sector público.
 
-En diciembre de 2025 se hizo pública la [información de la compra para el periodo 2027-2028](https://discusion.salud.gob.mx/), brindando una oportunidad única para planificar recursos y priorizar el lanzamiento de productos. Esto plantea una pregunta crucial: 
+Las preguntas clave que necesitan responder son:
+- ¿Qué productos se compran?
+- ¿Qué instituciones adquieren cada producto?
+- ¿Cuántas piezas se compran de cada uno?
+- ¿Cómo ha evolucionado la demanda en el tiempo? ¿El producto está creciendo, disminuyendo o incluso siendo excluido?
 
-**¿A qué productos debemos dar prioridad?**
+En diciembre de 2025 se publicó la [información de la compra consolidada para el periodo 2027-2028](https://discusion.salud.gob.mx/), lo que representa una oportunidad única para planificar recursos, ajustar estrategias comerciales y priorizar el lanzamiento o registro de productos.
 
-## ¿Dónde surge el problema?
+Esto nos lleva a la pregunta central:  
+**¿A qué productos debemos dar prioridad para la próxima compra consolidada?**
 
-La base de datos contiene información de 3 procedimientos bianuales con 4,798 productos únicos distribuidos entre 11 instituciones, sumando un total de 12,685,508,417 piezas adquiridas. Con más de 38,000 filas de datos, responder estas preguntas requiere tecnología adecuada.
+Para responderla de forma informada, es esencial comparar el nuevo procedimiento con otros anteriores que cubran el mismo periodo de 2 años:
+1. CC 2023-2024: Compra consolidada 2023-2024
+2. CC 2025-2026: Compra consolidada 2025-2026
+3. CC 2027-2028: Compra consolidada 2027-2028
 
-## Solución
+## El origen del problema
 
-Cada producto tiene asociado un identificador único llamado **'Clave de cuadro básico'** que permite rastrearlo a lo largo de los procedimientos de compra. 
+La base de datos reúne información de estos tres procedimientos bianuales, abarcando **4,798 productos únicos** distribuidos entre **11 instituciones**, con un volumen total de **12,685,508,417 piezas** adquiridas. Esto genera más de **38,000 filas** de datos detallados. Analizar esta cantidad de información de manera manual o con herramientas tradicionales es impráctico y lento.
 
-### Paso 1: Crear una tabla maestra de productos
+## Nuestra solución: un análisis estructurado y escalable
 
-Como no todos los procedimientos incluyen las mismas claves, necesitamos una tabla que contenga todos los productos para que los filtros del tablero funcionen correctamente:
+Cada producto cuenta con un identificador único llamado **Clave de cuadro básico**, que permite rastrearlo consistentemente a través de los diferentes procedimientos.
+
+### Paso 1: Tabla maestra de productos
+Creamos una tabla que incluye todas las claves únicas presentes en cualquiera de los tres procedimientos, garantizando que los filtros posteriores funcionen correctamente.
 
 | clave           | descripcion                                                |
 | --------------- | ---------------------------------------------------------- |
@@ -45,38 +54,86 @@ Como no todos los procedimientos incluyen las mismas claves, necesitamos una tab
 | 010.000.6357.00 | BUDESONIDA-FORMOTEROL. AEROSOL. Cada gramo contiene…       |
 | 010.000.4225.00 | IMATINIB. COMPRIMIDO. Cada comprimido recubierto contiene… |
 
-### Paso 2: Integrar con BigQuery y Looker Studio
+Esta tabla puede enriquecerse con descripciones en otros idiomas para facilitar la presentación a interesados internacionales.
 
-#LookerStudio nos brinda una opción inmediata para visualización, mientras que #BigQuery proporciona el motor para que el análisis sea rápido y escalable.
+### Paso 2: Tabla analítica cruzada por institución y procedimiento
+Transformamos los datos en una estructura pivoteada ideal para visualización:
 
-La construcción del pipeline en Databricks que genera la base de datos puede consultarse aquí: [Diseño y limpieza de los datos](../medallion).
+| clave           | compra       | institucion | totales_max    | totales_institucion |
+| --------------- | ------------ | ----------- | -------------- | ------------------- |
+| 010.000.0104.00 | CC 2027-2028 | IMSS        | 226,092,211.00 | 166,856,793.00      |
+| 010.000.0104.00 | CC 2023-2024 | IMSS        | 145,202,987.00 | 116,783,741.00      |
 
-### Paso 3: Tabla analítica por institución y procedimiento
+### Paso 3: Tabla de rangos de fechas por procedimiento
+| comprac      | date_st    | date_end   |
+| ------------ | ---------- | ---------- |
+| CC 2023-2024 | 2023-01-01 | 2024-12-31 |
+| CC 2025-2026 | 2025-01-01 | 2026-12-31 |
+| CC 2027-2028 | 2027-01-01 | 2028-12-31 |
 
-| clave           | compra       | institucion | totales_max    | totales_institucion | descripcion                                    |
-| --------------- | ------------ | ----------- | -------------- | ------------------- | ---------------------------------------------- |
-| 010.000.0104.00 | CC 2027-2028 | IMSS        | 226,092,211.00 | 166,856,793.00      | PARACETAMOL. TABLETA. Cada tableta contiene... |
-| 010.000.0104.00 | CC 2023-2024 | IMSS        | 145,202,987.00 | 116,783,741.00      | PARACETAMOL. TABLETA. Cada tableta contiene... |
+### Paso 4: Integración con BigQuery y Looker Studio
+#LookerStudio ofrece visualización interactiva inmediata, mientras que #BigQuery proporciona el motor analítico rápido y escalable.
 
-### Paso 4: Tabla pivote con evolución temporal
+El pipeline de procesamiento y limpieza de datos en Databricks se detalla aquí: [Diseño y limpieza de los datos](../medallion).
 
-Una vista consolidada que resume las cantidades por clave en los tres procedimientos de compra:
+### Paso 5: Vista enriquecida en BigQuery
+Creamos una vista que combina toda la información necesaria:
 
-| clave           | descripcion                                    | max_2023_2024 | max_2025_2026 | max_2027_2028 |
-| --------------- | ---------------------------------------------- | ------------- | ------------- | ------------- |
-| 010.000.0246.00 | PROPOFOL. EMULSIÓN INYECTABLE. Cada ampolleta… | 1,881,146.00  | 2,863,790.00  | 4,345,683.00  |
+```sql
+CREATE OR REPLACE VIEW `project.business_analysis.gold_contribucion_enriched` AS
+SELECT
+  c.*,
+  p.descripcion,
+  d.date_st,
+  d.date_end
+FROM `project.business_analysis.gold_contribucion_p_institucion` c
+LEFT JOIN `project.business_analysis.gold_unique_products` p
+  ON c.clave = p.clave
+LEFT JOIN `project.business_analysis.purchases_date_range` d
+  ON c.comprac = d.comprac;
+```
+### Paso 6: Construcción del tablero interactivo
+El tablero permite a todos los involucrados en la generación de oferta:
 
-## Resultado
+- Detectar tendencias de crecimiento o decrecimiento por producto
+- Segmentar por institución y procedimiento de compra
+- Tomar decisiones informadas sobre prioridades para 2027-2028
 
-![Tablero de análisis](../../../assets/images/Looker_market_analysis.png)
+Incluimos campos calculados clave, como el crecimiento general entre la primera y la última compra:
 
+Campos calculados para calcular crecimiento entre la primera compra y la última: 
+```
+(SUM(CASE WHEN comprac = "CC 2027-2028" THEN totales_institucion ELSE 0 END) 
+- 
+SUM(CASE WHEN comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END))
+/
+SUM(CASE WHEN comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END)
+```
 
-Un tablero interactivo que permite a los fabricantes:
-- Identificar tendencias de crecimiento o decrecimiento por producto
-- Segmentar información por institución y procedimiento de compra
-- Tomar decisiones informadas sobre qué productos priorizar para 2027-2028
+Y crecimientos específicos para las instituciones de mayor volumen (IMSS e IMSS Bienestar):
 
-Ingresa para visualizar el tablero:
+```
+(SUM(CASE WHEN institucion = "imss_bienestar" AND comprac = "CC 2027-2028" THEN totales_institucion ELSE 0 END) 
+- 
+SUM(CASE WHEN institucion = "imss_bienestar" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END))
+/
+SUM(CASE WHEN institucion = "imss_bienestar" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END)
+
+```
+
+```
+(SUM(CASE WHEN institucion = "imss" AND comprac = "CC 2027-2028" THEN totales_institucion ELSE 0 END) 
+- 
+SUM(CASE WHEN institucion = "imss" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END))
+/
+SUM(CASE WHEN institucion = "imss" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END)
+```
+
+## Resultado 
+
+Accede al tablero interactivo aquí:
+
 > [Tablero en Looker](https://lookerstudio.google.com/reporting/c0f3b5c5-c208-4a5a-b81e-9f136d65251e)
 
 
+![Tablero de análisis](../../../assets/images/Looker_market_analysis.png)

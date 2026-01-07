@@ -1,12 +1,14 @@
 ---
-title: 'Analyse de la demande de médicaments et fournitures pharmaceutiques du marché gouvernemental 2023-2028'
-description: 'Analyse évolutive des données d''approvisionnement public avec BigQuery et Looker Studio'
+title: 'Analyse de la demande de médicaments et consommables pharmaceutiques dans les marchés publics mexicains 2023-2028'
+description: 'Analyse scalable des données d’achats publics avec BigQuery et Looker Studio'
 publishDate: 'Jan 2 2023'
 tags:
   - Databricks
   - SPARK
   - Insights
   - Storytelling
+  - Looker Studio
+  - BigQuery
 lang: fr
 seo:
   image:
@@ -14,65 +16,117 @@ seo:
     alt: 'Aperçu du projet'
 ---
 
-## Problème
+## Le défi des fournisseurs pharmaceutiques dans les achats publics
 
-Les fournisseurs de produits pharmaceutiques et de matériel médical souhaitant vendre aux institutions gouvernementales font face au défi d'identifier :
+Les fournisseurs de médicaments et de consommables pharmaceutiques qui souhaitent vendre aux institutions publiques mexicaines sont confrontés à un défi permanent : obtenir une visibilité claire sur la demande réelle du secteur public.
+
+Les questions clés auxquelles ils doivent répondre sont :
 - Quels produits sont achetés ?
 - Quelles institutions achètent chaque produit ?
-- Combien d'unités sont acquises de chacun ?
-- Comment la demande a-t-elle évolué au fil du temps ? Est-elle en croissance, en déclin, ou le produit est-il exclu ?
+- Combien d’unités de chaque produit sont acquises ?
+- Comment la demande a-t-elle évolué dans le temps ? Le produit est-il en croissance, en déclin ou même en voie d’exclusion ?
 
-En décembre 2025, [les informations d'approvisionnement pour la période 2027-2028](https://discusion.salud.gob.mx/) ont été rendues publiques, offrant une opportunité unique pour planifier les ressources et prioriser le lancement de produits. Cela soulève une question cruciale :
+En décembre 2025, les [données de l’achat consolidé pour la période 2027-2028](https://discusion.salud.gob.mx/) ont été publiées, offrant une opportunité unique pour planifier les ressources, ajuster les stratégies commerciales et prioriser le lancement ou l’enregistrement de produits.
 
-**Quels produits devons-nous prioriser ?**
+Cela nous amène à la question centrale :  
+**Quels produits devons-nous prioriser pour le prochain appel d’offres consolidé ?**
 
-## D'où vient le problème ?
+Pour y répondre de manière éclairée, il est essentiel de comparer le nouveau cycle avec les procédures précédentes couvrant la même période de deux ans :
+1. CC 2023-2024 : Achat consolidé 2023-2024
+2. CC 2025-2026 : Achat consolidé 2025-2026
+3. CC 2027-2028 : Achat consolidé 2027-2028
 
-La base de données contient des informations de 3 procédures d'approvisionnement bisannuelles avec 4 798 produits uniques répartis dans 11 institutions, totalisant 12 685 508 417 unités achetées. Avec plus de 38 000 lignes de données, répondre à ces questions nécessite une technologie appropriée.
+## Origine du problème
 
-## Solution
+La base de données regroupe les informations de ces trois procédures biennales, couvrant **4 798 produits uniques** répartis entre **11 institutions**, pour un volume total de **12 685 508 417 unités** acquises. Cela génère plus de **38 000 lignes** de données détaillées. Analyser ce volume manuellement ou avec des outils traditionnels est impraticable et chronophage.
 
-Chaque produit possède un identifiant unique appelé **'Code de catalogue de base'** (Clave de cuadro básico) qui permet de le suivre à travers les procédures d'approvisionnement.
+## Notre solution : une analyse structurée et scalable
 
-### Étape 1 : Créer une table maître des produits
+Chaque produit possède un identifiant unique appelé **Clave de cuadro básico**, permettant un suivi cohérent à travers les différents cycles d’achat.
 
-Comme toutes les procédures n'incluent pas les mêmes codes, nous avons besoin d'une table contenant tous les produits pour que les filtres du tableau de bord fonctionnent correctement :
+### Étape 1 : Table maître des produits
+Nous avons créé une table contenant toutes les clés uniques présentes dans l’un des trois cycles, garantissant le bon fonctionnement des filtres ultérieurs.
 
-| code            | description                                             |
+| clave           | descripcion                                             |
 | --------------- | ------------------------------------------------------- |
-| 010.000.4301.00 | ERTAPENEM. SOLUTION INJECTABLE. Chaque flacon contient… |
+| 010.000.4301.00 | ERTAPÉNEM. SOLUTION INJECTABLE. Chaque flacon contient… |
 | 010.000.6357.00 | BUDÉSONIDE-FORMOTÉROL. AÉROSOL. Chaque gramme contient… |
-| 010.000.4225.00 | IMATINIB. COMPRIMÉ. Chaque comprimé enrobé contient…    |
+| 010.000.4225.00 | IMATINIB. COMPRIMÉ PELLICULÉ. Chaque comprimé contient… |
 
-### Étape 2 : Intégrer avec BigQuery et Looker Studio
+Cette table peut être enrichie avec des descriptions dans d’autres langues pour faciliter la présentation à des parties prenantes internationales.
 
-**Looker Studio** offre une option immédiate pour la visualisation, tandis que **BigQuery** fournit le moteur pour rendre l'analyse rapide et évolutive.
+### Étape 2 : Table analytique croisée par institution et cycle d’achat
+Les données sont transformées en une structure pivot idéale pour la visualisation :
 
-La construction du pipeline Databricks qui génère la base de données peut être consultée ici : [Conception et nettoyage des données](../medallion).
+| clave           | comprac      | institucion | totales_max    | totales_institucion |
+| --------------- | ------------ | ----------- | -------------- | ------------------- |
+| 010.000.0104.00 | CC 2027-2028 | IMSS        | 226,092,211.00 | 166,856,793.00      |
+| 010.000.0104.00 | CC 2023-2024 | IMSS        | 145,202,987.00 | 116,783,741.00      |
 
-### Étape 3 : Table analytique par institution et procédure
+### Étape 3 : Table des plages de dates par cycle d’achat
 
-| code            | achat        | institution | totaux_max     | totaux_institution | description                                      |
-| --------------- | ------------ | ----------- | -------------- | ------------------ | ------------------------------------------------ |
-| 010.000.0104.00 | CC 2027-2028 | IMSS        | 226,092,211.00 | 166,856,793.00     | PARACÉTAMOL. COMPRIMÉ. Chaque comprimé contient… |
-| 010.000.0104.00 | CC 2023-2024 | IMSS        | 145,202,987.00 | 116,783,741.00     | PARACÉTAMOL. COMPRIMÉ. Chaque comprimé contient… |
+| comprac      | date_st    | date_end   |
+| ------------ | ---------- | ---------- |
+| CC 2023-2024 | 2023-01-01 | 2024-12-31 |
+| CC 2025-2026 | 2025-01-01 | 2026-12-31 |
+| CC 2027-2028 | 2027-01-01 | 2028-12-31 |
 
-### Étape 4 : Table pivot avec évolution temporelle
+### Étape 4 : Intégration avec BigQuery et Looker Studio
+#LookerStudio offre une visualisation interactive immédiate, tandis que #BigQuery fournit le moteur analytique rapide et scalable.
 
-Une vue consolidée résumant les quantités par code à travers les trois procédures d'approvisionnement :
+Le pipeline de traitement et de nettoyage des données sur Databricks est détaillé ici : [Conception et nettoyage des données](../medallion).
 
-| code            | description                                    | max_2023_2024 | max_2025_2026 | max_2027_2028 |
-| --------------- | ---------------------------------------------- | ------------- | ------------- | ------------- |
-| 010.000.0246.00 | PROPOFOL. ÉMULSION INJECTABLE. Chaque ampoule… | 1,881,146.00  | 2,863,790.00  | 4,345,683.00  |
+### Étape 5 : Vue enrichie dans BigQuery
+Nous avons créé une vue combinant toutes les informations nécessaires :
+
+```sql
+CREATE OR REPLACE VIEW `project.business_analysis.gold_contribucion_enriched` AS
+SELECT
+  c.*,
+  p.descripcion,
+  d.date_st,
+  d.date_end
+FROM `project.business_analysis.gold_contribucion_p_institucion` c
+LEFT JOIN `project.business_analysis.gold_unique_products` p
+  ON c.clave = p.clave
+LEFT JOIN `project.business_analysis.purchases_date_range` d
+  ON c.comprac = d.comprac;
+  ```
+
+### Étape 6 : Construction du tableau de bord interactif
+
+Le tableau de bord permet à tous les acteurs de la génération d’offres de :
+
+- Détecter les tendances de croissance ou de décroissance par produit
+- Segmenter par institution et cycle d’achat
+- Prendre des décisions éclairées sur les priorités 2027-2028
+
+Des champs calculés clés ont été ajoutés, notamment la croissance globale entre le premier et le dernier cycle :
+
+```
+(SUM(CASE WHEN comprac = "CC 2027-2028" THEN totales_institucion ELSE 0 END) 
+- SUM(CASE WHEN comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END))
+/ SUM(CASE WHEN comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END)
+```
+
+Et les croissances spécifiques pour les institutions à plus fort volume (IMSS et IMSS Bienestar) :
+
+```
+-- Croissance IMSS Bienestar
+(SUM(CASE WHEN institucion = "imss_bienestar" AND comprac = "CC 2027-2028" THEN totales_institucion ELSE 0 END) 
+- SUM(CASE WHEN institucion = "imss_bienestar" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END))
+/ SUM(CASE WHEN institucion = "imss_bienestar" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END)
+```
+
+```
+-- Croissance IMSS
+(SUM(CASE WHEN institucion = "imss" AND comprac = "CC 2027-2028" THEN totales_institucion ELSE 0 END) 
+- SUM(CASE WHEN institucion = "imss" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END))
+/ SUM(CASE WHEN institucion = "imss" AND comprac = "CC 2023-2024" THEN totales_institucion ELSE 0 END)
+```
 
 ## Résultats
+Accédez au tableau de bord interactif ici :
+> [Tableau de bord sur Looker](https://lookerstudio.google.com/reporting/c0f3b5c5-c208-4a5a-b81e-9f136d65251e)
 
 ![Tableau de bord d'analyse](../../../assets/images/Looker_market_analysis.png)
-
-Un tableau de bord interactif qui permet aux fabricants de :
-- Identifier les tendances de croissance ou de déclin par produit
-- Segmenter les informations par institution et procédure d'approvisionnement
-- Prendre des décisions éclairées sur les produits à prioriser pour 2027-2028
-
-Accéder au tableau de bord :
-> [Tableau de bord sur Looker](https://lookerstudio.google.com/reporting/c0f3b5c5-c208-4a5a-b81e-9f136d65251e)

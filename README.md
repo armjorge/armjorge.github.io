@@ -1,6 +1,31 @@
 # Dante - Astro & Tailwind CSS Theme by justgoodui.com
 
-Dante is a single-author blog and portfolio theme for Astro.js. Featuring a minimal, slick, responsive and content-focused design. For more Astro.js themes please check [justgoodui.com](https://justgoodui.com/).
+
+2. How Your New CI/CD & Branching Strategy Works
+  .github/workflows/deploy.yml deployment flow:
+
+    1                   ┌───────────────────────────────┐
+    2                   │ JDEV-7-Update-portfolio       │ (Active Development)
+    3                   └───────────────┬───────────────┘
+    4                                   │
+    5                                   ▼ [Pull Request / Merge]
+    6                   ┌───────────────────────────────┐
+    7                   │             main              │ (Basic CI/CD)
+    8                   │   -> Triggers Build Check     │ (Verifies no errors, does NOT deploy)
+    9                   └───────────────┬───────────────┘
+   10                                   │
+   11                                   ▼ [Merge to Staging]
+   12                   ┌───────────────────────────────┐
+   13                   │            staging            │ (Full CD)
+   14                   │   -> Triggers Build & Deploy  │ (Deploys live to GitHub Pages)
+   15                   └───────────────────────────────┘
+
+   * On push or pull request to main or staging: The build verification triggers. This compiles
+     the entire Astro static site to catch any compilation, frontmatter, or type-checking
+     issues (I verified this locally with npm run build and it builds perfectly!).
+   * On push to staging (or manual trigger): The deploy step is executed, deploying your built
+     site directly to GitHub Pages. Pushing or creating PRs to main will safely skip this
+     deploy step.
 
 ![Dante Astro.js Theme](public/dante-preview.jpg)
 

@@ -49,6 +49,10 @@ El producto debe ser escalable: en 2026 se han publicado tres versiones de la de
 
 ### Estrategia
 
+
+![High level GMDP](../../../assets/images/highlevelGMDP.png)
+
+
 Se utiliza Jira para trackear las historias necesarias y vincular los epics a los proyectos de Atlassian, organizando el trabajo en tres frentes:
 
 **Data Modeling**
